@@ -12,3 +12,15 @@ wheels/
 # Environment files
 .env
 
+# Local Python version (pyenv)
+.python-version
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
