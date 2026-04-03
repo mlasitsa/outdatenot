@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     github_id: int
     github_private_key: str
     github_webhook_secret: str
+    postgres_user: str
+    postgres_password: str
+    postgres_db: str
 
     model_config = SettingsConfigDict(**configDict)
 
