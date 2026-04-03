@@ -1,29 +1,35 @@
 # TODO: Make some minor config adjustments
+# redis:
+#     image: redis:7.4-alpine
+#     restart: unless-stopped
+#     ports:
+#       - "6379:6379"
+#     command: redis-server --save 20 1 --loglevel warning --requirepass ....
+#     volumes:
+#       - redis_data:/data
+#     volumes:
+#       redis_data:
+#         driver: local
 services:
-  redis:
-    image: redis:7.4-alpine
-    restart: always
-    ports:
-      - "6379:6379"
-    command: redis-server --save 20 1 --loglevel warning --requirepass yourstrongpassword
-    volumes:
-      - redis_data:/data
-volumes:
-  redis_data:
-    driver: local
-
   db:
-    image: postgres:14-alpine 
-    restart: always
+    image: postgres:17
+    container_name: outdatenot-postgres
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydatabase
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5432:5432" 
+      - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data 
-  
-  volumes:
-  pgdata:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
+
 
