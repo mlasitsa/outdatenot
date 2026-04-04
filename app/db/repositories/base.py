@@ -20,9 +20,9 @@ class BaseRepository(Generic[T]):
         if filters:
             statement = statement.where(*filters)
 
-        return self.session.exec(statement).all()
+        return list[T](self.session.exec(statement).all())
 
-    def create(self, obj: T) -> T:
+    def create(self, obj: T) -> T: 
         """Add and commit a new record."""
         self.session.add(obj)
         self.session.commit()

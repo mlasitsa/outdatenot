@@ -8,7 +8,7 @@ from app.core.config import settings
 
 class DatabaseProvider:
     def __init__(self):
-        self.url = settings.database_url
+        self.url = str(settings.database_url)
         self.engine = self.build_engine()
 
     def get_engine_kwargs(self) -> dict:

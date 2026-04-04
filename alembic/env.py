@@ -6,7 +6,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from app.core.config import settings
-from app.db.models import Installation, Repository, RepositorySettings, ValidationRun, ValidationStep
+from app.db.models import InstallationModel, RepositoryModel, RepositorySettingsModel, ValidationRunModel, ValidationStepModel
 from sqlmodel import SQLModel
 
 # this is the Alembic Config object, which provides

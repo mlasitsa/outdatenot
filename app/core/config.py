@@ -2,11 +2,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import PostgresDsn, RedisDsn
 
 
-configDict: dict = {
-    "env_file": ".env",
-    "extra": "forbid"
-}
-
 class Settings(BaseSettings):
     app_name: str = "outdatenot"
     environment: str = "local"
@@ -23,9 +18,12 @@ class Settings(BaseSettings):
     postgres_password: str
     postgres_db: str
 
-    model_config = SettingsConfigDict(**configDict)
+    model_config = SettingsConfigDict(env_file=".env", extra="forbid")
 
-settings = Settings()
+
+# Required fields are supplied at runtime by environment variables / .env (pydantic-settings)
+# static analyzers cannot see that, so they flag a bare `Settings()` call, we can safely ignore the error.
+settings = Settings()  # type: ignore[call-arg]  # pyright: ignore[reportCallIssue]
 
 
 

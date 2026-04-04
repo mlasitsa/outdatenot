@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from sqlmodel import SQLModel, Field
 
 
-class Repository(SQLModel, table=True):
+class RepositoryModel(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
 
     installation_id: int = Field(foreign_key="installation.id", index=True)

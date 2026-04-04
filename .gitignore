@@ -24,3 +24,5 @@ wheels/
 
 # Logs
 *.log
+
+outdatenot.egg-info

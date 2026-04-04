@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 from sqlmodel import SQLModel, Field
 
 
-class ValidationStep(SQLModel, table=True):
+class ValidationStepModel(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
 
     validation_run_id: int = Field(foreign_key="validationrun.id", index=True)
