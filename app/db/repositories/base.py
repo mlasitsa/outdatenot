@@ -13,7 +13,7 @@ class BaseRepository(Generic[T]):
         """Fetch a single record by ID."""
         return self.session.get(self.model, id)
 
-    def get_all(self, filters: Any = None) -> List[T]:
+    def get_all(self, filters: Optional[Any] = None) -> List[T]:
         """Fetch all records for the model."""
         statement = select(self.model)
 
