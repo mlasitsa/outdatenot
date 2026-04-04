@@ -10,5 +10,7 @@ app.include_router(health_router, prefix="/api/v1")
 @app.get("/")
 async def root():
     return {
-        "message": settings
+        "app_name": settings.app_name,
+        "version": settings.version,
+        "environment": settings.environment,
     }
